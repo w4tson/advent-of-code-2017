@@ -1,6 +1,8 @@
 package com.pdwtech.aoc.aoc1
 
-class Aoc1A {
+import com.pdwtech.aoc.Aoc.parseInt
+
+object Aoc1A {
 
     fun solvePuzzle(input : String) : Int {
         val wrappedInput = input + input[0]
@@ -10,10 +12,6 @@ class Aoc1A {
                 false -> Pair(acc.first , parseInt(c))
             }
         }).first
-    }
-
-    fun parseInt(c : Char) : Int {
-        return "${c}".toInt()
     }
 }
 

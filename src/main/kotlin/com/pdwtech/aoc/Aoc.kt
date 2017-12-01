@@ -1,13 +1,18 @@
 package com.pdwtech.aoc
 
+import java.nio.file.Files
+import java.nio.file.Paths
 
 
-class Aoc {
+object Aoc {
 
-    companion object {
-        @JvmStatic fun main(args: Array<String>) {
-            println("Hello, from Kotlin!")
+    fun parseInt(c : Char) : Int {
+        return "${c}".toInt()
+    }
 
-        }
+    fun readInput(fileName: String) : List<String> {
+        val resource = javaClass.getResource("/$fileName")
+        val toURI = resource.toURI()
+        return Files.readAllLines(Paths.get(toURI))
     }
 }
