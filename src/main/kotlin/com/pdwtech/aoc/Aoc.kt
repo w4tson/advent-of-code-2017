@@ -15,4 +15,13 @@ object Aoc {
         val toURI = resource.toURI()
         return Files.readAllLines(Paths.get(toURI))
     }
+
+    fun toIntArray(row : String) : IntArray = row.split(Regex("\\s")).map { it.toInt() }.toIntArray()
+
+    val IntArray.head: Int
+        get() = this[0]
+
+    val IntArray.tail: IntArray
+        get() = drop(1).toIntArray()
+
 }
