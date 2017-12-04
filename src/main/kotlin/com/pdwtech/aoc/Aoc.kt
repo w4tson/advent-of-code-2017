@@ -3,7 +3,6 @@ package com.pdwtech.aoc
 import java.nio.file.Files
 import java.nio.file.Paths
 
-
 object Aoc {
 
     fun parseInt(c : Char) : Int {
@@ -24,4 +23,10 @@ object Aoc {
     val IntArray.tail: IntArray
         get() = drop(1).toIntArray()
 
+    fun String.splitWhitespace() : List<String> {
+        return split(Regex("\\s"))
+    }
+
+
 }
+

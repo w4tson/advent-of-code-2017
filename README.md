@@ -8,4 +8,4 @@ This year I'm attempting them in Kotlin. I'd like to think I'd get further howev
 * Day 1 Just getting my feet wet, so far so good. Learned about Kotlin objects
 * Day 2 First extension method, found out about `toTypedArray`. Cheeky bit of recursion  
 * Day 3 Wow! great puzzle. 1st part done. Kotling generators are great
-* Day 4 Looking for a scan function but none found 
+* Day 4 Looking for a scan function but none found. Nice little extension for whitespace 
