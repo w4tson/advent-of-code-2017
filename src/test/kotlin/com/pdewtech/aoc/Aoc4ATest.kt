@@ -1,7 +1,7 @@
 package com.pdewtech.aoc
 
 import com.pdwtech.aoc.Aoc
-import com.pdwtech.aoc.aoc1.Aoc4A.validPassphrase
+import com.pdwtech.aoc.day4.Aoc4A.validPassphrase
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 

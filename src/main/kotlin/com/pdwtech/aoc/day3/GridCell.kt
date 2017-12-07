@@ -1,6 +1,6 @@
-package com.pdwtech.aoc.aoc6
+package com.pdwtech.aoc.day3
 
-import com.pdwtech.aoc.aoc6.Direction.*
+import com.pdwtech.aoc.day3.Direction.*
 
 
 data class GridCell(val index: Int, val locStat: LocStat, val value : Int) {
