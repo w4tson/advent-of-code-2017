@@ -11,4 +11,5 @@ This year I'm attempting them in Kotlin. I'd like to think I'd get further howev
 * Day 4 Looking for a scan function but none found. Nice little extension for whitespace
 * Day 5 ...
 * Day 5 Done. More tailrec. Used `.drop(n)` function on sequence. Nice
+* Day 6 
  
