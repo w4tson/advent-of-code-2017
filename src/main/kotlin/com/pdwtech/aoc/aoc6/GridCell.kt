@@ -1,6 +1,6 @@
-package com.pdwtech.aoc
+package com.pdwtech.aoc.aoc6
 
-import com.pdwtech.aoc.Direction.*
+import com.pdwtech.aoc.aoc6.Direction.*
 
 
 data class GridCell(val index: Int, val locStat: LocStat, val value : Int) {
@@ -23,7 +23,7 @@ data class GridCell(val index: Int, val locStat: LocStat, val value : Int) {
         val br2 = calcCorner(index-1)
         val ring = ring(br)
         val side = width(ring) -1
-        return Corners(br2+1,br - side,br - 2*side,br - 3*side)
+        return Corners(br2 + 1, br - side, br - 2 * side, br - 3 * side)
     }
 
     fun calcCorner(index : Int) : Int = cornerSequence().first { it >= index }
@@ -49,14 +49,14 @@ enum class Direction {
 data class Location(val x: Int, val y: Int) {
     fun locationsAroundMe() : List<Location> {
         return listOf(
-                Location(x+1, y),
-                Location(x+1, y+1),
-                Location(x, y+1),
-                Location(x-1, y+1),
-                Location(x-1, y),
-                Location(x-1, y-1),
-                Location(x, y-1),
-                Location(x+1, y-1)
+                Location(x + 1, y),
+                Location(x + 1, y + 1),
+                Location(x, y + 1),
+                Location(x - 1, y + 1),
+                Location(x - 1, y),
+                Location(x - 1, y - 1),
+                Location(x, y - 1),
+                Location(x + 1, y - 1)
         )
     }
 }
@@ -70,10 +70,10 @@ data class LocStat(val location: Location, val direction: Direction) {
 
     fun advance() : LocStat {
         val newLocation = when(direction) {
-            NORTH -> Location(location.x, location.y+1)
-            EAST -> Location(location.x +1, location.y)
-            SOUTH -> Location(location.x, location.y-1)
-            WEST  -> Location(location.x-1, location.y)
+            NORTH -> Location(location.x, location.y + 1)
+            EAST -> Location(location.x + 1, location.y)
+            SOUTH -> Location(location.x, location.y - 1)
+            WEST  -> Location(location.x - 1, location.y)
         }
         return LocStat(newLocation, direction)
     }

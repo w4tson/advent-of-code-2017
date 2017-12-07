@@ -1,6 +1,6 @@
-package com.pdwtech.aoc
+package com.pdwtech.aoc.aoc6
 
-import com.pdwtech.aoc.Direction.EAST
+import com.pdwtech.aoc.aoc6.Direction.EAST
 
 class Grid() {
 

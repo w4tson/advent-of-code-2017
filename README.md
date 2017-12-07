@@ -9,7 +9,8 @@ This year I'm attempting them in Kotlin. I'd like to think I'd get further howev
 * Day 2 First extension method, found out about `toTypedArray`. Cheeky bit of recursion  
 * Day 3 Wow! great puzzle. 1st part done. Kotling generators are great. Part2 : FML
 * Day 4 Looking for a scan function but none found. Nice little extension for whitespace
-* Day 5 ...
 * Day 5 Done. More tailrec. Used `.drop(n)` function on sequence. Nice
-* Day 6 
+* Day 6 ... 
+* Day 7 Trees! Destructed mulitple groups from a regex. Lovely
+
  
