@@ -1,12 +1,12 @@
 package com.pdewtech.aoc
 
 import com.pdwtech.aoc.Aoc.readInput
-import com.pdwtech.aoc.day8.Part1.solvePart1
-import com.pdwtech.aoc.day8.Part1.solvePart2
+import com.pdwtech.aoc.day9.Part1.solvePart1
+import com.pdwtech.aoc.day9.Part1.solvePart2
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
-class Day8Test {
+class Day9Test {
 
     @Test
     fun example() {
@@ -42,8 +42,8 @@ class Day8Test {
         assertThat(solvePart1("{{<!}>},{<!{>},{<!>>},{<!!>}}"))
                 .isEqualTo(9)
 
-        val result = solvePart1(readInput("aoc8")[0])
-        println("Day 8 part 1 = $result")
+        val result = solvePart1(readInput("aoc9")[0])
+        println("Day 9 part 1 = $result")
     }
 
     @Test
@@ -65,8 +65,8 @@ class Day8Test {
 
         assertThat(solvePart2("""{<{o"i!a,<{i<a>}""")).isEqualTo(10)
 
-        val result = solvePart2(readInput("aoc8")[0])
-        println("Day 8 part 2 = $result")
+        val result = solvePart2(readInput("aoc9")[0])
+        println("Day 9 part 2 = $result")
 
     }
 }

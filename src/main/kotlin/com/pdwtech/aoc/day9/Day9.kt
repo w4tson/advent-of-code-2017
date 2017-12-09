@@ -1,6 +1,6 @@
-package com.pdwtech.aoc.day8
+package com.pdwtech.aoc.day9
 
-import com.pdwtech.aoc.day8.Mode.GARBAGE_START
+import com.pdwtech.aoc.day9.Mode.GARBAGE_START
 
 
 object Part1 {
@@ -17,9 +17,9 @@ object Part1 {
     }
 }
 
-data class State(var mode : Mode = Mode.GROUP_START,
-                 var depth: Int = 0,
-                 var escaping: Boolean = false,
+data class State(private var mode : Mode = Mode.GROUP_START,
+                 private var depth: Int = 0,
+                 private var escaping: Boolean = false,
                  var totalGroups: Int = 0,
                  var totalGarbage: Int = 0){
 
