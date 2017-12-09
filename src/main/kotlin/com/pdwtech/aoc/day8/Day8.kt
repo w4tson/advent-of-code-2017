@@ -1,5 +1,7 @@
 package com.pdwtech.aoc.day8
 
+import com.pdwtech.aoc.day8.Mode.GARBAGE_START
+
 
 object Part1 {
 
@@ -22,58 +24,18 @@ data class State(var mode : Mode = Mode.GROUP_START,
                  var totalGarbage: Int = 0){
 
     fun next(ch : Char) : State {
-        return when {
-            escaping  -> stopEscaping()
-            ch == '!' -> startEscaping()
-            ch == '>' -> setMode(Mode.GARBAGE_END)
-            ch == '<' && mode != Mode.GARBAGE_START -> setMode(Mode.GARBAGE_START)
-            ch == '{' && mode != Mode.GARBAGE_START -> incDepth()
-            ch == '}' && mode != Mode.GARBAGE_START -> addGroup().decDepth()
-            mode == Mode.GARBAGE_START -> countGarbage()
-            else -> this
+        when {
+            escaping  -> escaping = false
+            ch == '!' -> escaping = true
+            ch == '>' -> mode = Mode.GARBAGE_END
+            ch == '<' && mode != GARBAGE_START -> mode = GARBAGE_START
+            ch == '{' && mode != GARBAGE_START -> depth += 1
+            ch == '}' && mode != GARBAGE_START -> { totalGroups += depth; depth -= 1 }
+            mode == GARBAGE_START -> totalGarbage += 1
+            else -> Unit
         }
-    }
-
-    fun setMode(m : Mode) : State {
-        mode = m
         return this
     }
-
-    fun incDepth() : State {
-        depth += 1
-        return this
-    }
-
-    fun decDepth() : State {
-        depth -= 1
-        return this
-    }
-
-    fun addGroup() : State {
-        totalGroups += depth
-        return this
-    }
-
-    fun stopEscaping() : State {
-        escaping = false
-        return this
-    }
-
-    fun startEscaping() : State {
-        escaping = true
-        return this
-    }
-
-    fun countGarbage() : State {
-        totalGarbage += 1
-        return this
-    }
-
-    fun stopGarbageCounting() : State {
-        totalGarbage -= 1
-        return this
-    }
-
 }
 
 enum class Mode {
