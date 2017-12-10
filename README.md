@@ -14,5 +14,5 @@ This year I'm attempting them in Kotlin. I'd like to think I'd get further howev
 * Day 7 Trees! Destructed mulitple groups from a regex. Lovely
 * Day 8
 * Day 9 Nothing new here
-* Day 10 Default params, `by lazy`, slices and nicely reused the circular index
+* Day 10 Default params, `by lazy`, slices and nicely reused the circular index. Wow part 2, difficult to read
  
