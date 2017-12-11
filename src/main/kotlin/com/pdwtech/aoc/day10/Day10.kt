@@ -3,10 +3,7 @@ package com.pdwtech.aoc.day10
 import com.pdwtech.aoc.Aoc.circularIndexSeq
 
 
-class State(var index: Int = 0,
-            var skip : Int = 0,
-            val hashSize: Int){
-
+class State(var index: Int = 0, var skip : Int = 0, val hashSize: Int) {
     val hash: Array<Int> by lazy { IntRange(0, hashSize -1).toList().toTypedArray() }
 }
 
@@ -36,7 +33,7 @@ object Day10 {
 
     fun knotHashRound(input: Array<Int>, state: State) : State {
         return input.fold(state, { acc, next ->
-            val slice = acc.hash.circularIndexSeq(acc.index).take(next).toList().also {  }
+            val slice = acc.hash.circularIndexSeq(acc.index).take(next).toList()
             val rev = acc.hash.slice(slice.asIterable()).reversed().iterator()
             slice.forEach { acc.hash[it] =  rev.next() }
             acc.index = acc.hash.circularIndexSeq(acc.index).take(next + acc.skip + 1).last()
