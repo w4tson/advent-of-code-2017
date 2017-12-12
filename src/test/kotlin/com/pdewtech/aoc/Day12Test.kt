@@ -3,6 +3,7 @@ package com.pdewtech.aoc
 import com.pdwtech.aoc.Aoc.readInput
 import com.pdwtech.aoc.Day12.Day12
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.Ignore
 import org.junit.Test
 
 class Day12Test {
@@ -14,11 +15,19 @@ class Day12Test {
 
     }
 
+    @Ignore
     @Test
     fun actual() {
-        val input = readInput("aoc12-example")
+        val input = readInput("aoc12")
         val result = Day12.part1(input)
         println(result)
 
+    }
+
+    @Test
+    @Ignore
+    fun part2() {
+        val input = readInput("aoc12")
+        Day12.part2(input)
     }
 }
