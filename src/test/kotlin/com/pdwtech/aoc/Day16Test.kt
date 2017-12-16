@@ -20,7 +20,7 @@ class Day16Test {
     fun testMoveParse() {
         val moves = Day16.parseMoves(exampleMoveStr)
         assertThat(moves).hasSize(3)
-        assertThat(moves).contains(Spin(3), Exchange(3,4), Partner('e', 'b'))
+        assertThat(moves).contains(Spin(1), Exchange(3,4), Partner('e', 'b'))
     }
 
     @Test

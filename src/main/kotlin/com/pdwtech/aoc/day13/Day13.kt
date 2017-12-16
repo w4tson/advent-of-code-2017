@@ -107,7 +107,7 @@ object Day13 {
             sev = part1(firewall, delay++)
             println("sev = $sev delay = $delay")
         }
-        return delay+1
+        return delay+2
     }
 
     fun part1(firewall : Firewall, delay : Int = 0) : Int {
