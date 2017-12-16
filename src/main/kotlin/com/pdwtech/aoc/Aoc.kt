@@ -37,5 +37,7 @@ object Aoc {
     }
 
     fun Array<Int>.indexOfMax() : Int = this.indexOf(this.max())
+
+
 }
 

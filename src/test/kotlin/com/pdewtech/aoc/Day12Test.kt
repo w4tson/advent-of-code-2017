@@ -1,7 +1,7 @@
 package com.pdewtech.aoc
 
 import com.pdwtech.aoc.Aoc.readInput
-import com.pdwtech.aoc.day12.Day12
+import com.pdwtech.aoc.Day12.Day12
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Ignore
 import org.junit.Test

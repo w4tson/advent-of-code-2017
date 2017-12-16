@@ -1,6 +1,5 @@
 package com.pdwtech.aoc.day13
 
-import com.pdwtech.aoc.day12.Day12
 import com.pdwtech.aoc.day13.Direction.*
 
 enum class Direction {

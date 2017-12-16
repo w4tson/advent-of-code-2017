@@ -1,8 +1,6 @@
 package com.pdwtech.aoc.day14
 
 import com.pdwtech.aoc.day10.Day10
-import com.pdwtech.aoc.day12.Day12
-import com.pdwtech.aoc.day12.Graph
 
 object Day14 {
 
@@ -41,8 +39,8 @@ object Day14 {
             entry.value.flatMap { listOf(Pair(entry.key, it), Pair(entry.key, it))}
         }
 
-        val graph = Graph<Int>(g.keys, edges)
-        GraphHelper.numOfGroups(graph, 0)
+//        val graph = Graph<Int>(g.keys, edges)
+//        GraphHelper.numOfGroups(graph, 0)
 
     }
 

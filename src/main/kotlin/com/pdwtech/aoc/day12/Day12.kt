@@ -1,4 +1,4 @@
-package com.pdwtech.aoc.day12
+package com.pdwtech.aoc.Day12
 
 
 object Day12 {
@@ -18,12 +18,8 @@ object Day12 {
     }
 
     //TODO the termination of this is wrong.
-    tailrec fun numOfGroups(g: Graph<Node>, acc: Int) : Int {
-        //println("GroupFound! acc : ${acc} new node: ${g.nodes.first()} node size : ${g.nodes.size} nodes ${g.nodes}")
-        if (acc % 20 == 0) {
-            println(acc)
-        }
-
+    tailrec fun numOfGroups(g: Graph, acc: Int) : Int {
+        println("GroupFound! acc : ${acc} new node: ${g.nodes.first()} node size : ${g.nodes.size} nodes ${g.nodes}")
         return when(g.nodes.size) {
             0 ->  acc
             else -> {
@@ -33,13 +29,13 @@ object Day12 {
         }
     }
 
-    fun notConnectedTo(node: Node, g: Graph<Node>) : Graph<Node> {
+    fun notConnectedTo(node: Node, g: Graph) : Graph {
         val nodes = g.nodes.filter { !hasPathTo(it, node, g) }.toSet()
         val edges = g.edges.filter { nodes.contains(it.first)|| nodes.contains(it.second) }.toList()
         return Graph(nodes, edges)
     }
 
-    fun hasPathTo(name: Node, to: Node, g: Graph<Node>) : Boolean {
+    fun hasPathTo(name: Node, to: Node, g: Graph) : Boolean {
         val distances = g.nodes.associate{ Pair(it, Int.MAX_VALUE) }.toMutableMap()
         distances[name] = 0
 
@@ -72,7 +68,7 @@ object Day12 {
         return zeroVisited || allInfinity
     }
 
-    fun buildGraph(input: List<String>) : Graph<Node> {
+    fun buildGraph(input: List<String>) : Graph {
         var nodes: MutableSet<Node> = mutableSetOf()
         var edges: MutableList<Edge> = mutableListOf()
 

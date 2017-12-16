@@ -1,11 +1,12 @@
-package com.pdwtech.aoc.day12
+package com.pdwtech.aoc.Day12
 
 typealias Node = String
 typealias Edge = Pair<Node, Node>
 
-class Graph<T>(val nodes: Set<T>, val edges : List<Pair<T, T>>) {
+class Graph(val nodes: Set<Node>, val edges : List<Edge>) {
 
-    fun neighbours(node: T) : Set<T> {
+
+    fun neighbours(node: Node) : Set<Node> {
         return edges.filter { it.first == node }
                 .flatMap { listOf(it.first, it.second) }
                 .toSet()
