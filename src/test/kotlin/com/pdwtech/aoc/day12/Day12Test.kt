@@ -1,4 +1,4 @@
-package com.pdewtech.aoc
+package com.pdwtech.aoc.day12
 
 import com.pdwtech.aoc.Aoc.readInput
 import com.pdwtech.aoc.Day12.Day12

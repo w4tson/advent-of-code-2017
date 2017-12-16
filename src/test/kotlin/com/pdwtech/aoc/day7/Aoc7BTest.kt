@@ -1,15 +1,14 @@
-package com.pdewtech.aoc
+package com.pdwtech.aoc.day7
 
 import com.pdwtech.aoc.Aoc
 import com.pdwtech.aoc.day7.Tree
 import org.junit.Test
 
-class Aoc7ATest {
+class Aoc7BTest {
 
     @Test
     fun example() {
         val lines = Aoc.readInput("aoc7")
-        val root = Tree().nameOfRoot(lines)
-        println("root = $root")
+        Tree().buildTree(lines)
     }
 }

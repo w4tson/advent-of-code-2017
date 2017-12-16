@@ -1,4 +1,4 @@
-package com.pdewtech.aoc
+package com.pdwtech.aoc.day10
 
 import com.pdwtech.aoc.day10.Day10.part1
 import com.pdwtech.aoc.day10.Day10.part2

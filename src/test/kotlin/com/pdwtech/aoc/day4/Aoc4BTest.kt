@@ -1,4 +1,4 @@
-package com.pdewtech.aoc
+package com.pdwtech.aoc.day4
 
 import com.pdwtech.aoc.Aoc
 import com.pdwtech.aoc.day4.Aoc4B.validPassphrase

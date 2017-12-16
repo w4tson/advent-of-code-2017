@@ -2,9 +2,8 @@ package com.pdwtech.aoc.day16
 
 import com.pdwtech.aoc.Aoc.readInput
 
-
-
 object Day16 {
+
     private val aToP = "abcdefghijklmnop"
     private val actualData = aToP.toCharArray().toMutableList()
     private val actualMoves = parseMoves(readInput("aoc16")[0])

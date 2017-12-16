@@ -1,4 +1,4 @@
-package com.pdewtech.aoc
+package com.pdwtech.aoc.day9
 
 import com.pdwtech.aoc.Aoc.readInput
 import com.pdwtech.aoc.day9.Part1.solvePart1

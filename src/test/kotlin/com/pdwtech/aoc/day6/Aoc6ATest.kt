@@ -1,4 +1,4 @@
-package com.pdewtech.aoc
+package com.pdwtech.aoc.day6
 
 import com.pdwtech.aoc.day5.Aoc6A
 import org.assertj.core.api.Assertions.assertThat

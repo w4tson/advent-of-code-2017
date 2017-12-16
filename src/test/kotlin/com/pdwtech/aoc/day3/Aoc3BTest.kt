@@ -1,10 +1,6 @@
-package com.pdewtech.aoc
+package com.pdwtech.aoc.day3
 
 import com.pdwtech.aoc.day3.Direction.*
-import com.pdwtech.aoc.day3.Grid
-import com.pdwtech.aoc.day3.GridCell
-import com.pdwtech.aoc.day3.LocStat
-import com.pdwtech.aoc.day3.Location
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 

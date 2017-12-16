@@ -1,8 +1,7 @@
-package com.pdewtech.aoc
+package com.pdwtech.aoc.day11
 
 import com.pdwtech.aoc.Aoc.readInput
 import com.pdwtech.aoc.day11.Day11.move
-import com.pdwtech.aoc.day11.ORIGIN
 import org.junit.Test
 
 class Day11Test {
