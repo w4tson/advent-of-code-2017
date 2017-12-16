@@ -16,7 +16,7 @@ class Day13Test {
 
     @Test
     @Ignore
-    //TODO work out what's gone wrong with this 
+    //TODO work out what's gone wrong with this
     fun example1() {
         assertThat(Day13.part1(exampleFirewall)).isEqualTo(24)
     }
@@ -31,10 +31,7 @@ class Day13Test {
 
     @Test
     fun part1() {
-
-
         println(Day13.part1(firewall))
-
     }
 
     @Test
