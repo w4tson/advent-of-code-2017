@@ -27,6 +27,15 @@ object Aoc {
         return split(Regex("\\s"))
     }
 
+    fun  IntArray.circularIndexSeq(start: Int): Sequence<Int> {
+        return generateSequence(start, {
+            when(it) {
+                this.size - 1 -> 0
+                else          -> it +1
+            }
+        })
+    }
+
     fun <T> Array<T>.circularIndexSeq(start: Int): Sequence<Int> {
         return generateSequence(start, {
              when(it) {
