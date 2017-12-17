@@ -1,33 +1,42 @@
 package com.pdwtech.aoc.day12
 
 import com.pdwtech.aoc.Aoc.readInput
-import com.pdwtech.aoc.Day12.Day12
+import com.pdwtech.aoc.Day12.Day12.groups
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.Ignore
 import org.junit.Test
+
 
 class Day12Test {
 
+    val exampleInput = readInput("aoc12-example")
+    val actualInput = readInput("aoc12")
+    val r = Regex("""^(\d+) <-> (.*)""")
+
     @Test
-    fun examples() {
-        val input = readInput("aoc12-example")
-        assertThat(Day12.part1(input)).isEqualTo(6)
-
-    }
-
-    @Ignore
-    @Test
-    fun actual() {
-        val input = readInput("aoc12")
-        val result = Day12.part1(input)
-        println(result)
-
+    fun exampleGroups() {
+        val exampleGraph = parse(exampleInput)
+        val groups = groups(exampleGraph)
+        assertThat(groups).hasSize(2)
     }
 
     @Test
-    @Ignore
+    fun part1() {
+        val graph = parse(actualInput)
+        println(groups(graph).filter { it.contains(0) }.first().size)
+    }
+
+    @Test
     fun part2() {
-        val input = readInput("aoc12")
-        Day12.part2(input)
+        val graph = parse(actualInput)
+        println(groups(graph).size)
+    }
+
+    fun parse(input: List<String>) : Map<Int, List<Int>>  {
+        return input.associate { a -> toPair(a) }.toMap()
+    }
+
+    fun toPair(s : String) : Pair<Int, List<Int>> {
+        val (node, childStr) = r.find(s)!!.destructured
+        return Pair(node.toInt(), childStr.split(", ").map(String::toInt))
     }
 }

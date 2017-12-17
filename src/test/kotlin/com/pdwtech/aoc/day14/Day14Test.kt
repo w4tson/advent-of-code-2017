@@ -1,16 +1,16 @@
 package com.pdwtech.aoc.day14
 
 import com.pdwtech.aoc.day14.Day14.adjacentIndicies
-import com.pdwtech.aoc.day14.Day14.buildGraph
+import com.pdwtech.aoc.day14.Day14.countRegions
 import org.junit.Test
 
-import org.junit.Assert.*
 import org.assertj.core.api.Assertions.assertThat
 
 
 class Day14Test {
 
     val exampleKey = "flqrgnkx"
+    val key = "stpzcrnm"
 
     @Test
     fun toBinary() {
@@ -28,7 +28,7 @@ class Day14Test {
 
     @Test
     fun actual() {
-        println("Day 14 used squares = ${Day14.usedSquares("stpzcrnm")}")
+        println("Day 14 used squares = ${Day14.usedSquares(key)}")
     }
 
     @Test
@@ -38,7 +38,12 @@ class Day14Test {
     }
 
     @Test
-    fun name() {
-        buildGraph(exampleKey)
+    fun part2Example() {
+        assertThat(countRegions(exampleKey)).isEqualTo(1242)
+    }
+
+    @Test
+    fun part2() {
+        println(countRegions(key))
     }
 }
