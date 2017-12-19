@@ -1,4 +1,4 @@
-package com.pdwtech.aoc.Day12
+package com.pdwtech.aoc.day12
 
 object Day12 {
 
