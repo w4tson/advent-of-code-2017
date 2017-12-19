@@ -1,11 +1,10 @@
 package com.pdwtech.aoc.day18
 
 import kotlinx.coroutines.experimental.channels.Channel
-import kotlinx.coroutines.experimental.runBlocking
 import kotlinx.coroutines.experimental.withTimeout
-//6605 too low
-//6477 too low
-class Program(val program: List<String>, val id: Long, val send : Channel<Long>, val receive: Channel<Long>) {
+import kotlinx.coroutines.experimental.withTimeoutOrNull
+
+class Program(program: List<String>, private val id: Long, private val send : Channel<Long>, private val receive: Channel<Long>) {
 
     private val memory : MutableMap<String, Long> = mutableMapOf()
     private val instructions : List<Instruction> = program.map { parseInstruction2(it) }
@@ -15,7 +14,6 @@ class Program(val program: List<String>, val id: Long, val send : Channel<Long>,
     private val pid = id;
 
     init {
-        memory[INSTR_POINTER] = 0
         memory["p"] = id
         memory["pid"] = id
         memory["sends$id"] = 0
@@ -49,7 +47,7 @@ class Program(val program: List<String>, val id: Long, val send : Channel<Long>,
         }
     }
 
-    fun parseInstruction2(i : String) : Instruction {
+    private fun parseInstruction2(i : String) : Instruction {
         return when(i.slice(0..3)) {
             "set " -> {
                 val (param1, param2) = parseTwoParams(i)
@@ -77,28 +75,32 @@ class Program(val program: List<String>, val id: Long, val send : Channel<Long>,
         }
     }
 
-    fun parseTwoParams(i : String) : Pair<String, String> {
+    private fun parseTwoParams(i : String) : Pair<String, String> {
         val (param1, param2) = i.slice(4 until i.length).split(" ")
         return Pair(param1, param2)
     }
 
-    suspend fun run() : Long {
+    suspend fun run() : Long? {
         println("starting program $id")
-        withTimeout(10_000) {
-            while (memory[INSTR_POINTER]!! >= 0 && memory[INSTR_POINTER]!! < instructions.size) {
-                val currPointer = memory[INSTR_POINTER]
-                val instruction = instructions[memory.getValue(INSTR_POINTER).toInt()]
+        val result= withTimeoutOrNull(20_000) {
+            while (isValidInstructionIndex()) {
+                val currPointer = memory.getOrPut(INSTR_POINTER, {0L})
+                val instruction = instructions[currPointer.toInt()]
                 instruction.exec()
 
                 println("pid=$pid p=${memory[INSTR_POINTER]} i=$instruction      $memory")
                 if (currPointer == memory[INSTR_POINTER]) {
-                    memory[INSTR_POINTER] = memory.getOrDefault(INSTR_POINTER, 0) + 1
+                    memory.compute(INSTR_POINTER, { _, v -> v?.plus(1L)})
                 }
             }
+            memory["sends$pid"]
         }
-
-
         println(memory)
-        return memory.getOrDefault("rcv", 0)
+        return result ?: memory["sends$pid"]
+    }
+
+    private fun isValidInstructionIndex() : Boolean {
+        val instructionIndex = memory.getOrElse(INSTR_POINTER, {0})
+        return instructionIndex >= 0 && instructionIndex< instructions.size
     }
 }

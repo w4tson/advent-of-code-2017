@@ -5,8 +5,6 @@ import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.channels.Channel
 import kotlinx.coroutines.experimental.launch
 import kotlinx.coroutines.experimental.runBlocking
-import kotlinx.coroutines.experimental.withTimeout
-import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
 
@@ -22,29 +20,26 @@ class Day18Test {
     }
 
     @Test
-    fun part1() {
-        runBlocking {
-                val program0 = Channel<Long>(1000)
-                val program1 = Channel<Long>(1000)
-
-//                channel.send(1L)
-                val j1 = async(coroutineContext) { Program(actualInput, 0L, program0, program1).run() }
-                val j2 = async(coroutineContext) { Program(actualInput, 1L, program1, program0).run() }
-//                j1.await()
-//                j2.join()
-
-        }
+    fun example() {
+        duet(exampleInput2)
     }
 
     @Test
-    fun exampe() {
+    fun part1() {
+        duet(actualInput)
+    }  
+
+    fun duet(input: List<String>) {
         runBlocking {
-            val program0 = Channel<Long>(100)
-            val program1 = Channel<Long>(100)
+            val program0 = Channel<Long>(1000)
+            val program1 = Channel<Long>(1000)
 
-            val j1 = async(coroutineContext) { Program(exampleInput2, 0L, program0, program1).run() }
-            val j2 = async(coroutineContext) { Program(exampleInput2, 1L, program1, program0).run() }
-
+            val send0Count = launch { Program(input, 0L, program0, program1).run() }
+            val send1Count = launch { Program(input, 1L, program1, program0).run() }
+            send0Count.join()
+            send1Count.join()
         }
     }
+
+
 }

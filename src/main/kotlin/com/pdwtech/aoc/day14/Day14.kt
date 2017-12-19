@@ -1,6 +1,6 @@
 package com.pdwtech.aoc.day14
 
-import com.pdwtech.aoc.Day12.Day12
+import com.pdwtech.aoc.day12.Day12
 import com.pdwtech.aoc.day10.Day10
 
 object Day14 {

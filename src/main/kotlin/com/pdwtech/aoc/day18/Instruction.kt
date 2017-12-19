@@ -1,9 +1,6 @@
 package com.pdwtech.aoc.day18
 
 import kotlinx.coroutines.experimental.channels.Channel
-import kotlinx.coroutines.experimental.launch
-import kotlinx.coroutines.experimental.runBlocking
-
 
 abstract class Instruction(val memory: MutableMap<String, Long>) {
 
@@ -64,13 +61,8 @@ class Rcv(memory: MutableMap<String, Long>, val register: String) : Instruction(
 
 class Receive(memory: MutableMap<String, Long>, val register: String, val receive: Channel<Long>) : Instruction(memory) {
     override suspend fun exec() {
-        val pid = memory["pid"]
-        println("pid$pid waiting to receive")
         val result = receive.receive()
-        println("pid$pid received $result storing it in $register")
         memory[register] = result
-        memory.computeIfPresent("sends$pid") { _, v -> v + 1 }
-
     }
 
     override fun toString(): String =  "${javaClass.simpleName} $register"
@@ -78,12 +70,9 @@ class Receive(memory: MutableMap<String, Long>, val register: String, val receiv
 
 class Send(memory: MutableMap<String, Long>, val register: String, val send: Channel<Long>) : Instruction(memory) {
     override suspend fun exec() {
-        launch {
-            val pid = memory["pid"]
-            println("pid$pid sending $register")
-            send.send(eval(register))
-        }
-
+        val pid = memory["pid"]
+        send.send(eval(register))
+        memory.computeIfPresent("sends$pid") { _, v -> v + 1 }
     }
 
     override fun toString(): String =  "${javaClass.simpleName} $register "
