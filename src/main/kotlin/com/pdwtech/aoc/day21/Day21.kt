@@ -4,36 +4,59 @@ import java.lang.Math.pow
 
 class Day21(val rulesStr : List<String>) {
     
-    private val initial = ".#./..#/###"
+    val initial = ".#./..#/###"
 
-    private val rules = rulesStr.map {
+    val rules = rulesStr.map {
         val (k, v) = it.split(" => ")
         Pair(k, v)
     }.toMap()
     
-    private val rotationsToRules = rules.keys.flatMap { rule ->  allCombos(rule).map { Pair(rule, it) } }.toMap()
+    val rotationsToRules = rules.keys.flatMap { rule ->  allCombos(rule).map { Pair(it, rule) } }.toMap() 
     
-    fun part1(n : Int) {
-//        generateSequence(initial, { 
-//            when(size(it) % 2) {
-//                0 -> splitInto2By2(it)
-//            }
-        }
+    fun part1() : Sequence<String> {
+        return generateSequence(initial, { 
+             when(size(it) % 2) {
+                0 -> stich2s(splitInto2By2(it).map {
+                    val r = rotationsToRules[it] ?: throw Exception("(2) Rule not found for $it")
+
+
+                    rules[r]!! 
+                })
+                else -> stitch3s(splitInto3By3(it).map { 
+                    println(it)
+                    val r = rotationsToRules[it] ?: throw Exception("(3) Rule not found for $it")
+                    println("$it is rules $r => ${rules[r]!!} ")
+                    rules[r]!! 
+                })
+            }
+        })
+    }
+
+    fun stitch3s(list: List<String>) : String {
+        val resultantWidth = Math.sqrt(list.sumBy { it.length }.toDouble())
+        val w = resultantWidth.toInt() / 4
+
+        return (0 until w).map { i ->
+            val row = list.slice(i*w until i*w+w)
+
+            row.map { it.stripSlashes().slice(0 until 4) }.joinToString(separator = "") + "/" +
+            row.map { it.stripSlashes().slice(4 until 8) }.joinToString(separator = "") + "/" +
+            row.map { it.stripSlashes().slice(8 until 12) }.joinToString(separator = "") + "/" +
+            row.map { it.stripSlashes().slice(12 until 16) }.joinToString(separator = "") 
+        }.joinToString(separator = "/")
     }
     
-    //TODO
-    fun stich2s(list: List<String>, width: Int) : String {
-        val size = size(list[0])
-        val w = width / 2
+    fun stich2s(list: List<String>) : String {
+        val resultantWidth = Math.sqrt(list.sumBy { it.length }.toDouble())
+        val w = resultantWidth.toInt() / 3
         
-        var str = ""
-
-        (0 until w).map { i ->
-            val row = list.slice(i*w until w+i)
-            row.map { it.slice(0 until 2) }.joinToString(separator = "") + "/" +
-            row.map { it.slice(2 until 4) }.joinToString(separator = "") 
-        }
-        return ""
+        return (0 until w).map { i ->
+            val row = list.slice(i*w until i*w+w)
+            
+            row.map { it.stripSlashes().slice(0 until 3) }.joinToString(separator = "") + "/" +
+            row.map { it.stripSlashes().slice(3 until 6) }.joinToString(separator = "") + "/" + 
+            row.map { it.stripSlashes().slice(6 until 9) }.joinToString(separator = "") 
+        }.joinToString(separator = "/")
     }
 
     fun splitInto3By3(square: String) : List<String> {
@@ -77,7 +100,7 @@ class Day21(val rulesStr : List<String>) {
         return list
     }
     
-    fun allCombos(square: String) : List<String> = allRotations(square) + allRotations(flipHorizontal(square)) + allRotations(flipVertical(square))
+    fun allCombos(square: String) : List<String> = allRotations(square) + allRotations(flipHorizontal(square)) + allRotations(flipVertical(square)) + listOf(square)
     
     fun allRotations(square: String) : List<String> = (1..3)
             .fold(listOf(), { acc, c -> acc + if (acc.isNotEmpty()) rotate(acc.last()) else rotate(square) })
@@ -104,9 +127,5 @@ class Day21(val rulesStr : List<String>) {
     
     fun size(square: String) : Int = square.indexOfFirst { it == '/' }
     
-    fun part1() {
-        // String to Int representation
-        // 
-        // map possible input permutations -> output
-    }
+    fun String.stripSlashes() : String = this.filter { it != '/' }
 }

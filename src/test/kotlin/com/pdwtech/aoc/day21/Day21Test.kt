@@ -10,6 +10,61 @@ class Day21Test {
     val actualRules  = readInput("aoc21")
 
     @Test
+    fun part1() {
+        
+        
+    }
+
+    @Test
+    fun part1Example() {
+        assertThat(Day21(exampleRules).part1().take(1).last())
+                .isEqualTo(".#./..#/###")
+        
+        assertThat(Day21(exampleRules).stitch3s(listOf("#..#/..../..../#..# "))).isEqualTo("#..#/..../..../#..#")
+
+        assertThat(Day21(exampleRules).part1().take(2).last())
+                .isEqualTo("#..#/..../..../#..#")
+        
+        assertThat(Day21(exampleRules).part1().take(3).last())
+                .isEqualTo("##.##./#..#../....../##.##./#..#../......")
+
+        assertThat(Day21(exampleRules).part1().take(3).last().count { it == '#' })
+                .isEqualTo(12)
+
+//        ##.|##.
+//        #..|#..
+//        ...|...
+//        ---+---
+//        ##.|##.
+//        #..|#..
+//        ...|...
+
+       
+    }
+
+    @Test
+    fun name() {
+        assertThat(Day21(exampleRules).allCombos(".#./..#/###")).contains(".#./..#/###")
+        assertThat(Day21(exampleRules).rotationsToRules.keys).contains(".#./..#/###")
+    }
+
+    @Test
+    fun stitch3s() {
+        val stitched = Day21(exampleRules).stitch3s(listOf(".#./.../###", "#.#/.../...",
+                ".../..#/#.#","###/#../.#."))
+        assertThat(stitched).isEqualTo(".#.#.#/....../###.../...###/..##../#.#.#.")    
+    }
+
+    @Test
+    fun stitch2s() {
+        val stitched = Day21(exampleRules).stich2s(listOf(".#/..", ".#/..","##/..","#./##"))
+        assertThat(stitched).isEqualTo(".#.#/..../###./..##")
+
+        val stitched2 = Day21(exampleRules).stich2s(listOf(".#/.."))
+        assertThat(stitched2).isEqualTo(".#/..")
+    }
+
+    @Test
     fun splitInto3s() {
         val biggy = ".#.#.#/....../###.../...###/..##../#.#.#."
         val listOfThrees = Day21(exampleRules).splitInto3By3(biggy)
