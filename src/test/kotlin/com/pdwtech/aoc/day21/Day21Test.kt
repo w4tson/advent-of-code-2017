@@ -12,23 +12,29 @@ class Day21Test {
     @Test
     fun part1() {
         
-        
+        println(Day21(actualRules).pixelsAfterNIterations(5))
+    }
+
+    @Test
+    fun part2() {
+
+        println(Day21(actualRules).pixelsAfterNIterations(18))
     }
 
     @Test
     fun part1Example() {
-        assertThat(Day21(exampleRules).part1().take(1).last())
+        assertThat(Day21(exampleRules).fractal().take(1).last())
                 .isEqualTo(".#./..#/###")
         
         assertThat(Day21(exampleRules).stitch3s(listOf("#..#/..../..../#..# "))).isEqualTo("#..#/..../..../#..#")
 
-        assertThat(Day21(exampleRules).part1().take(2).last())
+        assertThat(Day21(exampleRules).fractal().take(2).last())
                 .isEqualTo("#..#/..../..../#..#")
         
-        assertThat(Day21(exampleRules).part1().take(3).last())
+        assertThat(Day21(exampleRules).fractal().take(3).last())
                 .isEqualTo("##.##./#..#../....../##.##./#..#../......")
 
-        assertThat(Day21(exampleRules).part1().take(3).last().count { it == '#' })
+        assertThat(Day21(exampleRules).pixelsAfterNIterations(2))
                 .isEqualTo(12)
 
 //        ##.|##.

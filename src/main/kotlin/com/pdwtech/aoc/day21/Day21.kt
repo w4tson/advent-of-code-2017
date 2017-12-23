@@ -11,9 +11,11 @@ class Day21(val rulesStr : List<String>) {
         Pair(k, v)
     }.toMap()
     
-    val rotationsToRules = rules.keys.flatMap { rule ->  allCombos(rule).map { Pair(it, rule) } }.toMap() 
+    val rotationsToRules = rules.keys.flatMap { rule ->  allCombos(rule).map { Pair(it, rule) } }.toMap()
     
-    fun part1() : Sequence<String> {
+    fun pixelsAfterNIterations(n : Int) : Int = fractal().take(n+1).last().count { it == '#' }
+    
+    fun fractal() : Sequence<String> {
         return generateSequence(initial, { 
              when(size(it) % 2) {
                 0 -> stich2s(splitInto2By2(it).map {
@@ -33,7 +35,7 @@ class Day21(val rulesStr : List<String>) {
     }
 
     fun stitch3s(list: List<String>) : String {
-        val resultantWidth = Math.sqrt(list.sumBy { it.length }.toDouble())
+        val resultantWidth = Math.sqrt(list.sumBy { it.stripSlashes().length }.toDouble())
         val w = resultantWidth.toInt() / 4
 
         return (0 until w).map { i ->
@@ -47,10 +49,13 @@ class Day21(val rulesStr : List<String>) {
     }
     
     fun stich2s(list: List<String>) : String {
-        val resultantWidth = Math.sqrt(list.sumBy { it.length }.toDouble())
+        val resultantWidth = Math.sqrt(list.sumBy { it.stripSlashes().length }.toDouble())
         val w = resultantWidth.toInt() / 3
         
+        println("Stitching 2s for ${list.sumBy { it.length }} rw=${resultantWidth} ${resultantWidth/3}  (${list.size}) $list ")
+        
         return (0 until w).map { i ->
+            println("${i*w}..${i*w+w}")
             val row = list.slice(i*w until i*w+w)
             
             row.map { it.stripSlashes().slice(0 until 3) }.joinToString(separator = "") + "/" +
