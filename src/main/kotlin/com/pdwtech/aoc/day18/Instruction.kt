@@ -1,5 +1,6 @@
 package com.pdwtech.aoc.day18
 
+import com.pdwtech.aoc.day23.Program.Companion.INSTR_POINTER
 import kotlinx.coroutines.experimental.channels.Channel
 
 abstract class Instruction(val memory: MutableMap<String, Long>) {
@@ -15,6 +16,26 @@ abstract class Instruction(val memory: MutableMap<String, Long>) {
     }
 }
 
+class Jnz(memory: MutableMap<String, Long>, val register: String, val value: String) : Instruction(memory) {
+    override suspend fun exec() {
+        if (eval(register) != 0L) {
+            memory.put(Program.INSTR_POINTER, eval(Program.INSTR_POINTER) + eval(value))
+        }
+    }
+
+    override fun toString(): String =  "${javaClass.simpleName} $register $value"
+}
+
+class Sub(memory: MutableMap<String, Long>, val register: String, val value: String) : Instruction(memory) {
+    override suspend fun exec() {
+        if (register == "h") {
+            println("p=${memory[INSTR_POINTER]} $memory")
+        }
+        this.memory.put(register, eval(register) - eval(value))
+    }
+
+    override fun toString(): String =  "${javaClass.simpleName} $register $value"
+}
 
 class Set(memory: MutableMap<String, Long>, val register: String, val value: String) : Instruction(memory) {
     override suspend fun exec() {
@@ -34,6 +55,7 @@ class Add(memory: MutableMap<String, Long>, val register: String, val value: Str
 
 class Mul(memory: MutableMap<String, Long>, val register: String, val value: String) : Instruction(memory) {
     override suspend fun exec() {
+        this.memory.computeIfPresent("mulTotal", { _, v -> v +1 })
         this.memory.put(register, eval(register) * eval(value))
     }
 
