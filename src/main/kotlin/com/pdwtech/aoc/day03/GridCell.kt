@@ -38,12 +38,25 @@ data class GridCell(val index: Int, val locStat: LocStat, val value : Int) {
 }
 
 enum class Direction {
-    NORTH { override fun turn90AntiClockwise() = WEST  },
-    SOUTH { override fun turn90AntiClockwise() = EAST  },
-    WEST  { override fun turn90AntiClockwise() = SOUTH },
-    EAST  { override fun turn90AntiClockwise() = NORTH };
+    NORTH { 
+        override fun turn90AntiClockwise() = WEST 
+        override fun turn90Clockwise() = EAST 
+    },
+    SOUTH { 
+        override fun turn90AntiClockwise() = EAST  
+        override fun turn90Clockwise() = WEST  
+    },
+    WEST  { 
+        override fun turn90AntiClockwise() = SOUTH 
+        override fun turn90Clockwise() = NORTH 
+    },
+    EAST  { 
+        override fun turn90AntiClockwise() = NORTH 
+        override fun turn90Clockwise() = SOUTH 
+    };
 
     abstract fun turn90AntiClockwise(): Direction
+    abstract fun turn90Clockwise(): Direction
 }
 
 data class Location(val x: Int, val y: Int) {
