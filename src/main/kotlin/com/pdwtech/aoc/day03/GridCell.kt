@@ -41,22 +41,27 @@ enum class Direction {
     NORTH { 
         override fun turn90AntiClockwise() = WEST 
         override fun turn90Clockwise() = EAST 
+        override fun reverse() = SOUTH 
     },
     SOUTH { 
         override fun turn90AntiClockwise() = EAST  
-        override fun turn90Clockwise() = WEST  
+        override fun turn90Clockwise() = WEST
+        override fun reverse() = NORTH
     },
     WEST  { 
         override fun turn90AntiClockwise() = SOUTH 
-        override fun turn90Clockwise() = NORTH 
+        override fun turn90Clockwise() = NORTH
+        override fun reverse() = EAST
     },
     EAST  { 
         override fun turn90AntiClockwise() = NORTH 
-        override fun turn90Clockwise() = SOUTH 
+        override fun turn90Clockwise() = SOUTH
+        override fun reverse() = WEST
     };
 
     abstract fun turn90AntiClockwise(): Direction
     abstract fun turn90Clockwise(): Direction
+    abstract fun reverse(): Direction
 }
 
 data class Location(val x: Int, val y: Int) {

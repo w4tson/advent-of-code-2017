@@ -27,6 +27,17 @@ class Day22Test {
     }
 
     @Test
+    fun example2() {
+        assertThat(Cluster(initialExample).infectedAfterNBursts2(10_000_000))
+                .isEqualTo(2511944)
+    }
+
+    @Test
+    fun part2() {
+        println(Cluster(initial).infectedAfterNBursts2(10_000_000))
+    }
+
+    @Test
     fun testParseInput() {
         
         val i = initialMap(exampleInput)

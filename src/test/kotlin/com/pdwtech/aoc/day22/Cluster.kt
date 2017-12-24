@@ -30,8 +30,37 @@ class Cluster(val initial: Map<Coord, InfectionStatus>) {
     var infected = 0L
     
     fun infectedAfterNBursts(n: Int) : Long {
-        (1..n).forEach{ burst() }
+        (1..n).forEach { burst() }
         return infected
+    }
+
+    fun infectedAfterNBursts2(n: Int) : Long {
+        (1..n).forEach { burst2() }
+        return infected
+    }
+    
+    fun burst2() {
+        when(c.getOrPut(position, { CLEAN })) {
+            CLEAN -> {
+                direction = direction.turn90AntiClockwise()
+                c[position] = WEAKENED
+            }
+            WEAKENED -> {
+                infected ++
+                c[position] = INFECTED
+
+            }
+            INFECTED -> {
+                direction = direction.turn90Clockwise()
+                c[position] = FLAGGED
+
+            }
+            FLAGGED -> {
+                direction = direction.reverse()
+                c[position] = CLEAN
+            }
+        }
+        position = position.advance(direction)
     }
     
     fun burst() {
