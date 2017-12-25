@@ -17,6 +17,10 @@ object Aoc {
 
     fun toIntArray(row : String) : IntArray = row.split(Regex("\\s")).map { it.toInt() }.toIntArray()
 
+    fun <T> List<T>.head(): T = this.first()    
+    
+    fun <T> List<T>.tail(): List<T> = this.drop(1)    
+    
     val IntArray.head: Int
         get() = this[0]
 
@@ -35,6 +39,8 @@ object Aoc {
             }
         })
     }
+    
+    fun <T> List<T>.isSingleton(): Boolean = size == 1
 
     fun <T> Array<T>.circularIndexSeq(start: Int): Sequence<Int> {
         return generateSequence(start, {
